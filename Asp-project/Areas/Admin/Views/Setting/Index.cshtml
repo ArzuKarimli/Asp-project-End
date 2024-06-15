@@ -1,0 +1,54 @@
+﻿@model Asp_project.Areas.Admin.ViewModels.Setting.SettingVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section fontawesome{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+
+<div class="container mt-5 w-100 ml-5">
+    <a class="btn btn-success" asp-area="Admin" asp-controller="Setting" asp-action="Create">
+        <i class="fa-solid fa-circle-plus"></i>
+    </a>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var setting in Model.Settings)
+                {
+                    <tr>
+                        <td>@setting.Key</td>
+                        <td>
+                            @if (setting.Key == "PaymentMethodImage")
+                            {
+                                <img src="~/img/@setting.Value" style="width:100px !important; height:30px !important; border-radius:0 !important;" />
+                            }
+                            else
+                            {
+                                @setting.Value
+                            }
+                        </td>
+                        <td>
+                            <div class="btns">
+                                <a class="btn btn-info" asp-action="Detail" asp-route-id="@setting.Id">Detail</a>
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@setting.Id">Edit</a>
+                                <form class="forms-sample d-inline" method="post" asp-action="Delete" asp-route-id="@setting.Id">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
