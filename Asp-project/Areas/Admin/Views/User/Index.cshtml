@@ -1,0 +1,43 @@
+﻿@model List<UserRolesVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section fontawesome{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<div class="container mt-5 w-100 ml-5">
+
+   
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fullname</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Roles</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.Username
+                        </td>
+                        <td>
+                            @item.Roles
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

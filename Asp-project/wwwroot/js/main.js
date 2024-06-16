@@ -77,7 +77,6 @@
         }
     });
 
-
     // vegetable carousel
     $(".vegetable-carousel").owlCarousel({
         autoplay: true,
@@ -148,4 +147,5 @@
     });
 
 })(jQuery);
+
 

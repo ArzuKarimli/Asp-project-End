@@ -1,10 +1,11 @@
 ﻿using Asp_project.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
 namespace Asp_project.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
          public  DbSet<Settings> Settings { get; set; }

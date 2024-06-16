@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+
+@model LoginVM
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="~/Account/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+</head>
+<body>
+    <div class="login-form">
+        <div class="text">
+            Register
+        </div>
+        <form asp-action="SignIn" method="post">
+           
+            <div class="field">
+                <div class="fas fa-envelope"></div>
+                <input asp-for="EmailOrUserName" type="text" placeholder="Email or Username">
+            </div>
+          
+            <div class="field">
+                <div class="fas fa-lock"></div>
+                <input asp-for="Password" type="password" placeholder="Password" id="password">
+                <div class="icon fas fa-eye" data-input="password"></div>
+            </div>
+       
+            <button type="submit">Login</button>
+            <div class="link">
+                Not a member?
+                <a asp-action="SignUp">Signup now</a>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Account/js/JavaScript.js"></script>
+</body>
+</html>
