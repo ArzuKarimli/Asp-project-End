@@ -1,6 +1,8 @@
 ﻿
 @model HeaderVM
-
+@section css{
+    <link href="~/css/style.css" rel="stylesheet">
+}
 <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-primary" role="status"></div>
 </div>
@@ -46,13 +48,14 @@
                         <i class="fa fa-shopping-bag fa-2x"></i>
                         <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                     </a>
-                    <a href="#" class="my-auto ">
+                    <a href="#" class="my-auto">
                         <i class="fas fa-user fa-2x"></i>
                         <div class="account">
                         @if (User.Identity.IsAuthenticated)
                         {
                                 <form asp-controller="Account" asp-action="Logout">
-                                    <button class="px-1" type="submit" style="color:black;">Logout</button>
+                                    <a><p class="user-name-text">@User.Identity.Name</p></a>
+                                    <button class="px-1 btn-logout" type="submit" >Log Out</button>
                                 </form>
                                
                         }else{

@@ -20,7 +20,23 @@
     color: #81c408;
     margin-right: 10px;
 }
-
+.my-auto{
+    position:relative;
+}
+.account user-name-text{
+    color: #268216 !important;
+    text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15) !important;
+}
+.btn-logout {
+    color: black;
+    border: none;
+    background: none;
+    position: absolute;
+    top: 53px;
+    width:70px;
+    margin-left: -5px;
+    color: #81c408;
+}
 /* Links container stil */
 .account {
     display: flex;

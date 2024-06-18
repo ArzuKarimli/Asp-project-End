@@ -268,11 +268,18 @@
                                 <div class="col-6">
                                     <a href="#" class="h5">@item.Name</a>
                                     <div class="d-flex my-3">
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star"></i>
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            if (i <= @item.Rating)
+                                            {
+                                                <i class="fa fa-star text-secondary"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                        }
+
                                     </div>
                                     <h4 class="mb-3">$@item.Price</h4>
                                     <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
@@ -291,11 +298,18 @@
                             <div class="py-4">
                                 <a href="#" class="h5">@item.Name</a>
                                 <div class="d-flex my-3 justify-content-center">
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star text-primary"></i>
-                                    <i class="fas fa-star"></i>
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (i <= @item.Rating)
+                                        {
+                                            <i class="fa fa-star text-primary"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-star"></i>
+                                        }
+                                    }
+
                                 </div>
                                 <h4 class="mb-3">@item.Price $</h4>
                                 <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>

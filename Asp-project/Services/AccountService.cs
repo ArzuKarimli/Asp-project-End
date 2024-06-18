@@ -35,7 +35,7 @@ namespace Asp_project.Services
             {
                 foreach (var role in Enum.GetValues(typeof(Roles)))
                 {
-                    if (!await _roleManager.RoleExistsAsync(nameof(Roles.SuperAdmin)))
+                    if (!await _roleManager.RoleExistsAsync(nameof(Roles.Member)))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(nameof(Roles.SuperAdmin)));
                     }

@@ -1,4 +1,5 @@
-﻿using Asp_project.Data;
+﻿using Asp_project.Areas.Admin.ViewModels.Product;
+using Asp_project.Data;
 using Asp_project.Models;
 using Asp_project.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,33 @@ namespace Asp_project.Services
         {
             _context = context;
         }
+
+        public async Task CreateAsync(Product product)
+        {
+           await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Product product)
+        {
+             _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(Product product, ProductEditVM editProduct)
+        {
+            product.CategoryId = editProduct.CategoryId;
+            product.Description = editProduct.Description;
+            product.Price = editProduct.Price;
+            product.Quality = editProduct.Quality;
+            product.Weight = editProduct.Weight;
+            product.MinWeight= editProduct.MinWeight;
+            product.Check= editProduct.Check;
+            product.CountryOfOrigin = editProduct.CountryOfOrigin;
+            product.Name = editProduct.Name;
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<List<Product>> GetAllAsync()
         {
             return await _context.Products.Include(m => m.Category)

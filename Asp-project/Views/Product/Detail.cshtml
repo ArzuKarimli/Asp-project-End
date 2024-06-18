@@ -48,11 +48,18 @@
                         <p class="mb-3">Category: @Model.Product.Category.Name</p>
                         <h5 class="fw-bold mb-3">@Model.Product.Price $</h5>
                         <div class="d-flex mb-4">
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star"></i>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (i <= @Model.Product.Rating)
+                                {
+                                    <i class="fa fa-star text-secondary"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                            }
+
                         </div>
                         <p class="mb-4">@Model.Product.Description</p>
                        
@@ -147,11 +154,18 @@
                                         <div class="d-flex justify-content-between">
                                             <h5>Jason Smith</h5>
                                             <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
+                                                @for (int i = 0; i < 5; i++)
+                                                {
+                                                    if (i <= @Model.Product.Rating)
+                                                    {
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                }
+
                                             </div>
                                         </div>
                                         <p>
@@ -167,11 +181,18 @@
                                         <div class="d-flex justify-content-between">
                                             <h5>Sam Peters</h5>
                                             <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                @for (int i = 0; i < 5; i++)
+                                                {
+                                                    if (i <= @Model.Product.Rating)
+                                                    {
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                }
+
                                             </div>
                                         </div>
                                         <p class="text-dark">
@@ -216,11 +237,18 @@
                                     <div class="d-flex align-items-center">
                                         <p class="mb-0 me-3">Please rate:</p>
                                         <div class="d-flex align-items-center" style="font-size: 12px;">
-                                            <i class="fa fa-star text-muted"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            @for (int i = 0; i < 5; i++)
+                                            {
+                                                if (i <= @Model.Product.Rating)
+                                                {
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                            }
+
                                         </div>
                                     </div>
                                     <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>

@@ -1,0 +1,48 @@
+﻿@model List<ProductVM>
+@{
+    ViewData["Title"] = "Index";
+}
+@section fontawesome{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div class="container mt-5 w-100 ml-5">
+    <a class="btn btn-success" asp-area="Admin" asp-controller="Product" asp-action="Create">
+        <i class="fa-solid fa-circle-plus"></i>
+    </a>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img class="card-img-top" src="~/img/@item.Image" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text"><b>Description:</b>@item.Description</p>
+                        <p class="card-text"><b>Price:</b> @item.Price</p>
+                        <p class="card-text"><b>Category:</b> @item.Category</p>
+                        <p class="card-text"><b>Weight:</b> @item.Weight</p>
+                        <p class="card-text"><b>Min Weight:</b> @item.MinWeight</p>
+                        <p class="card-text"><b>Sales Count:</b> @item.SalesCount</p>
+                        <p class="card-text"><b>Country Of Origin:</b> @item.CountryOfOrigin</p>
+                        <p class="card-text"><b>Check:</b>@item.Check</p>
+                        <p class="card-text"><b>Rating:</b>@item.Rating</p>
+                        <p class="card-text"><b>Quality:</b>@item.Quality</p>
+                        <div class="btns">
+                            <a class="btn btn-info" asp-action="Detail" asp-route-id="@item.Id">Detail</a>
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <form class="forms-sample d-inline" method="post" asp-action="Delete" asp-route-id="@item.Id">
+                                <button class="btn btn-danger danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
