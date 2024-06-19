@@ -1,4 +1,5 @@
 ﻿using Asp_project.Data;
+using Asp_project.Models;
 using Asp_project.Services;
 using Asp_project.Services.Interfaces;
 using Asp_project.ViewModel;
@@ -24,6 +25,7 @@ namespace Asp_project.ViewComponents
             };
             return View(response);
         }
+       
     }
 
 

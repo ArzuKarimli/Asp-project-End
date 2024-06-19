@@ -217,16 +217,29 @@
                     <form action="#">
                         <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                         <div class="row g-4">
-                            <div class="col-lg-6">
-                                <div class="border-bottom rounded">
-                                    <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
+
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                              
+                                var emailClaim = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email);
+                                var email = emailClaim != null ? emailClaim.Value : "Email not found";
+
+                                <div class="col-lg-6">
+                                    <div class="border-bottom rounded">
+                                        <input type="text" class="form-control border-0 me-4" placeholder="@User.Identity.Name">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="border-bottom rounded">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email *">
+
+                                <div class="col-lg-6">
+                                    <div class="border-bottom rounded">
+                                        <input type="email" class="form-control border-0" placeholder="@email">
+                                    </div>
                                 </div>
-                            </div>
+                            }
+
+                          
+                          
                             <div class="col-lg-12">
                                 <div class="border-bottom rounded my-4">
                                     <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>

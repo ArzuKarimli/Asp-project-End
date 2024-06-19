@@ -110,6 +110,14 @@
         }
     });
 
+    //main image
+    $(document).ready(function () {
+        $('.product-image').css('border', '1px solid gray');
+
+       
+        $(`img[src='~/img/${imageName}']`).css('border', '3px solid green');
+        $(".main")
+    });
 
     // Modal Video
     $(document).ready(function () {
