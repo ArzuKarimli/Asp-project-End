@@ -1,5 +1,6 @@
 ﻿
 using Asp_project.Models;
+using Asp_project.Services;
 using Asp_project.Services.Interfaces;
 using Asp_project.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +16,19 @@ namespace Asp_project.Controllers
         private readonly IProductService _productService;
         private readonly IAdvertismentService _advertiserService;
         public readonly IBannerService _bannerService;
+        public readonly ICartService _cartService;
         public HomeController(IInformationService informationService,
                               ICategoryService categoryService,
                               IProductService productService, 
-                              IAdvertismentService advertiserService)
+                              IAdvertismentService advertiserService,
+                              ICartService cartService)
                              
         {
             _informationService = informationService;
             _categoryService = categoryService;
             _productService = productService;
             _advertiserService = advertiserService;
+            _cartService = cartService;
            
         }
         public async Task<IActionResult> Index()
@@ -46,5 +50,34 @@ namespace Asp_project.Controllers
             };
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProductToBasket(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            var result = await _cartService.AddProductToBasketAsync((int)id);
+
+            return Ok(new { count = result.count });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchText)
+        {
+            var products = await _productService.SearchProductAsync(searchText);
+
+            var model = new HomeVM
+            {
+                SearchProduct = products,
+                Features = await _informationService.GetAllFeatures(),
+                Counters = await _informationService.GetAllCounter(),
+                Categories = await _categoryService.GetAllAsync(),
+                Products = await _productService.GetAllWithProductImage(),
+                Advertisments = await _advertiserService.GetAllAsync(),
+            };
+
+            return View(model);
+        }
+
     }
 }

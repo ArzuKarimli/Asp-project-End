@@ -12,5 +12,9 @@ namespace Asp_project.Services.Interfaces
         Task CreateAsync(Product product);
         Task DeleteAsync(Product product);
         Task EditAsync(Product product,ProductEditVM editProduct);
+        Task<List<Product>> SearchProductAsync(string searchText);
+        Task<List<Product>> GetAllPaginationAsync(int page, int take = 4);
+       
+        Task<int> GetCountAsync();
     }
 }

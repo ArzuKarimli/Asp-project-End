@@ -68,11 +68,11 @@
                     </div>
                 }
             </div>
-            <h5 class="input">
+            <div class="input">
                 <h5>Upload New Images:</h5>
                 <input asp-for="NewImages" class="input__field field" type="file" multiple />
                 <span class="text-danger" asp-validation-for="NewImages"></span>
-            </h5>
+            </div>
             <div class="button-group">
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a class="btn btn-success" asp-action="Index">Back</a>

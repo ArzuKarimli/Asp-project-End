@@ -1,0 +1,35 @@
+﻿@model AdvertismentEditVM 
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="container mt-5 ml-3">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+       <h5>Title:</h5>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <h5>Discount:</h5>
+        <input asp-for="DiscountInfo" class="form-control" />
+        <span asp-validation-for="DiscountInfo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+            <h5>Upload New Images:</h5>
+            <input asp-for="NewImage" class="input__field field" type="file" multiple />
+            <span class="text-danger" asp-validation-for="NewImage"></span>
+    </div>
+    <div class="form-group">
+        <img src="~/img/@Model.Image" alt="Current Image" width="150" height="150" />
+    </div>
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-success" asp-action="Index">Back</a>
+        </div>
+</form>
+</div>
+
+

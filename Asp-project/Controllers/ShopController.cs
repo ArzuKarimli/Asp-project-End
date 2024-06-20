@@ -1,24 +1,48 @@
 ﻿using Asp_project.Models;
 using Asp_project.Services.Interfaces;
-using Asp_project.ViewModel.ProductVM;
+using Asp_project.ViewModel.Shop;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asp_project.Controllers
 {
    
-    public class ProductController : Controller
+    public class ShopController : Controller
     {
         private readonly IProductService _productService;
         private readonly IBannerService _bannerService;
         private readonly ICategoryService _categoryService;
+        private readonly IAdvertismentService _advertiserService;
 
-        public ProductController(IProductService productService,
+        public ShopController(IProductService productService,
                                 ICategoryService categoryService,
-                                IBannerService bannerService)
+                                IBannerService bannerService,
+                                IAdvertismentService advertisment)
         {
             _productService = productService;
             _bannerService = bannerService;
             _categoryService = categoryService;
+            _advertiserService = advertisment;
+        }
+        public async Task<IActionResult> Index(int page=1)
+        {
+            List<Banner> banners = await _bannerService.GetAllAsync();
+            List<Category> categories = await _categoryService.GetAllAsync();
+            List<Product> products = await _productService.GetAllAsync();
+
+            ShopVM model = new()
+            {
+                Banners= banners,
+                Categories= categories,
+                Products= products
+            };
+            ViewBag.pageCount = await GetPageCountAsync(4);
+            ViewBag.currentPage = page;
+            return View(model);
+        }
+        private async Task<int> GetPageCountAsync(int take)
+        {
+            int count = await _productService.GetCountAsync();
+            return (int)Math.Ceiling((decimal)count / take);
         }
 
         public async Task<IActionResult> Detail(int? id)
@@ -40,6 +64,8 @@ namespace Asp_project.Controllers
             return View(productDetail);
 
         }
+
+
     }
 }
 

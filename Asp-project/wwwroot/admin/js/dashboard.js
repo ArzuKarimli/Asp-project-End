@@ -1,4 +1,22 @@
-(function($) {
+(function ($) {
+
+    function updateMainStatus(id, isChecked) {
+        let skip = parseInt($(".blogs-area").children().length);
+        let blogsCount = parseInt($(".blogs-area").attr("data-count"));
+        let parentElem = $(".blogs-area");
+        let parentElemContent = $(".blogs-area").html();
+
+        $.ajax({
+
+            url: `/Admin/Advertisment/CheckedAds`,
+            type: "POST",
+            success: function (response) {
+                isChecked ? isChecked = false : isChecked = true;
+                document.querySelector(`#mainCheckbox_${id}`).checked = isChecked;
+            }
+        });
+
+    });
   'use strict';
   $(function() {
     var dataBar = {
@@ -154,7 +172,10 @@
         data: dataBarOrder,
         options: optionsBarOrder
       });
-    }
+      }
+    
+         
+
     var webAudienceMetricsSatackedData = {
       labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
       datasets: [

@@ -1,0 +1,30 @@
+﻿@model  AdvertismentDetailVM
+@{
+    ViewData["Title"] = "Detail";
+}
+@section fontawesome{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<div class="container">
+    <div class="card">
+        <label class="input">
+            <h5>Title :</h5>
+            <input asp-for="Title" class="input__field field" type="text" disabled />
+
+        </label>
+        <label class="input">
+            <h5>Discount:</h5>
+            <input asp-for="DiscountInfo" class="input__field field" type="text" disabled />
+
+        </label>
+        <img width="60" height="60" class="rounded-2" src="~/img/@Model.Image" />
+        <div class="button-group">
+
+            <a class="btn btn-success" asp-action="Index">Back</a>
+        </div>
+
+
+       
+    </div>
+</div>
+

@@ -1,0 +1,41 @@
+﻿
+
+@model HomeVM
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<div class="container-fluid fruite py-5">
+    <div class="container py-5">
+        <h1 class="mb-4">Search Results</h1>
+        <div class="row g-4">
+            @if (Model.SearchProduct != null && Model.SearchProduct.Count>0)
+            {
+                @foreach (var product in Model.SearchProduct)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border border-secondary rounded">
+                            <img src="~/img/@product.ProductImages.FirstOrDefault()?.Name" class="card-img-top rounded-top" alt="@product.Name">
+                            <div class="card-body">
+                                <h5 class="card-title">@product.Name (@product.Category.Name)</h5>
+                                <p class="card-text">@product.Description</p>
+                                <p class="text-dark fs-5 fw-bold">$@product.Price / kg</p>
+                                <div class="d-grid gap-2">
+                                    <a href="#" class="btn btn-primary"><i class="fa fa-shopping-bag me-2"></i> Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12">
+                    <h2 style="color:green;">Products Not Found.</h2>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

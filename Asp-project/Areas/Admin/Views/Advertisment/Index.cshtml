@@ -1,0 +1,51 @@
+﻿@model List<AdvertismentVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section fontawesome{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div class="container mt-5 w-100 ml-5">
+
+    <a class="btn btn-success" asp-area="Admin" asp-controller="Advertisment" asp-action="Create"><i class="fa-solid fa-circle-plus"></i></a>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Discount</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.DiscountInfo</td>
+                        <td><img class="card-img-top" src="~/img/@item.Image" alt=""></td>
+                        <td>
+                            <div class="btns">
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a class="btn btn-info" asp-action="Detail" asp-route-id="@item.Id">Detail</a>
+                                <form class="forms-sample d-inline" method="post" asp-action="Delete" asp-route-id="@item.Id"> <button class="btn btn-danger danger ">Delete</button></form>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-switch">
+                                <input id="mainCheckbox_@item.Id" class="form-check-input"
+                                       type="checkbox" @(item.IsMain ? "checked" : "")
+                                       onchange="updateMainStatus(@item.Id, this.checked)">
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
