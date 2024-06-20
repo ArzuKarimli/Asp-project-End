@@ -13,7 +13,7 @@ namespace Asp_project.Services
             _context = context;
         }
 
-        public async Task<List<Information>> GetAll()
+        public async Task<List<Information>> GetAllAsync()
         {
            return await _context.Informations.ToListAsync();
         }

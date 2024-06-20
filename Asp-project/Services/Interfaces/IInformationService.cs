@@ -6,7 +6,7 @@ namespace Asp_project.Services.Interfaces
     {
         Task<List<Information>> GetAllFeatures();
         Task<List<Information>> GetAllCounter();
-        Task<List<Information>> GetAll();
+        Task<List<Information>> GetAllAsync();
 
     }
 }
