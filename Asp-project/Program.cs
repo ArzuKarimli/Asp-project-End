@@ -20,6 +20,8 @@ builder.Services.AddScoped<IBannerService, BannerService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IContactService, ContactService>();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
@@ -36,6 +38,7 @@ builder.Services.Configure<IdentityOptions>(opt =>
     opt.Password.RequireUppercase = true;
     opt.Password.RequireNonAlphanumeric = true;
     opt.User.RequireUniqueEmail = true;
+    opt.SignIn.RequireConfirmedEmail = true;
 });
 var app = builder.Build();
 

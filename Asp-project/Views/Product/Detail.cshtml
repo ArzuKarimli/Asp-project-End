@@ -24,7 +24,7 @@
                     <div class="col-lg-6">
                         <div class="border rounded">
                             <a href="#">
-                                <img src="~/img/@Model.Product.ProductImages.FirstOrDefault(m =>!m.IsMain)?.Name" class="img-fluid rounded" alt="Image">
+                                <img src="~/img/@Model.Product.ProductImages.FirstOrDefault()?.Name" class="img-fluid rounded" alt="Image">
                             </a>
                         </div>
                     </div>
@@ -221,6 +221,17 @@
                                         <input type="email" class="form-control border-0" placeholder="@email">
                                     </div>
                                 </div>
+                            }else{
+                                <div class="col-lg-6">
+                                    <div class="border-bottom rounded">
+                                        <input type="text" class="form-control border-0 me-4" placeholder="Your Name *">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="border-bottom rounded">
+                                        <input type="email" class="form-control border-0" placeholder="Your Email *">
+                                    </div>
+                                </div>
                             }
 
                           
@@ -281,7 +292,7 @@
                     </div>
                     <div class="col-lg-12">
                         <h4 class="mb-4">Featured products</h4>
-                       @foreach (var product in Model.Products.Where(m=>m.Rating>3).Take(6))
+                       @foreach (var product in Model.Products.Where(m=>m.Price<3).Take(6))
                         {
                             <div class="d-flex align-items-center justify-content-start">
                                 <div class="rounded" style="width: 100px; height: 100px;">

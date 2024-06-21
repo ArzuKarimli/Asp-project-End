@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace Asp_project.Controllers
 {
    
-    public class ShopController : Controller
+    public class ProductController : Controller
     {
         private readonly IProductService _productService;
         private readonly IBannerService _bannerService;
         private readonly ICategoryService _categoryService;
         private readonly IAdvertismentService _advertiserService;
 
-        public ShopController(IProductService productService,
+        public ProductController(IProductService productService,
                                 ICategoryService categoryService,
                                 IBannerService bannerService,
                                 IAdvertismentService advertisment)
@@ -45,6 +45,7 @@ namespace Asp_project.Controllers
             return (int)Math.Ceiling((decimal)count / take);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Detail(int? id)
         {
             if (id is null) return BadRequest();

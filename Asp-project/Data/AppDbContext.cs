@@ -17,10 +17,12 @@ namespace Asp_project.Data
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Advertisment> advertisments { get; set; }
         public DbSet<Banner> Banners { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); 
 
         }
     }

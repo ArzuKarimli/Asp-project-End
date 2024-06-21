@@ -9,7 +9,7 @@
             }
         }, 1);
     };
-    spinner(0);
+    spinner();
 
     // Fixed Navbar
     $(window).scroll(function () {
@@ -164,7 +164,47 @@
         });
     });
 
-})(jQuery);
+    $(document).on("click", ".btn-minus", function () {
+        let id = parseInt($(this).attr("data-id"));
+        var row = $(this).closest("tr");
+        var productCountElement = $('.product-count');
+        var basketTotalPriceElement = $('.total-price');
+        var productPriceElement = row.find(".product-price");
 
+        $.ajax({
+            url: `/cart/ReductionCounterProduct`,
+            type: "POST",
+            data: { id: id },
+            success: function (response) {
+                productCountElement.text(response.count);
+                basketTotalPriceElement.text(`$${response.totalPrice}`);
+                productPriceElement.text(`$${response.price}`);
+                if (response.count == 0) {
+                    row.remove();
+                }
+            }
+        });
+    });
+
+    $(document).on("click", ".btn-plus", function () {
+        let id = parseInt($(this).attr("data-id"));
+        var row = $(this).closest("tr");
+        var productCountElement = $('.product-count');
+        var basketTotalPriceElement = $('.total-price');
+        var productPriceElement = row.find(".product-price");
+
+        $.ajax({
+            url: `/cart/IncrementCounterProduct`,
+            type: "POST",
+            data: { id: id },
+            success: function (response) {
+                productCountElement.text(response.count);
+                basketTotalPriceElement.text(`$${response.totalPrice}`);
+                productPriceElement.text(`$${response.price}`);
+            }
+        });
+    });
+
+})(jQuery);
 
 
