@@ -1,10 +1,12 @@
 ﻿using Asp_project.Areas.Admin.ViewModels.Information;
 using Asp_project.Models;
 using Asp_project.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asp_project.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class InformationController : Controller
     {
         private readonly InformationService _informationService;
@@ -12,6 +14,8 @@ namespace Asp_project.Areas.Admin.Controllers
         {
             _informationService = informationService;
         }
+        [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Index()
         {
             List<Information> infos= await _informationService.GetAllAsync();
