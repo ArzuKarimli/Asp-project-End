@@ -2,11 +2,13 @@
 using Asp_project.Areas.Admin.ViewModels.Product;
 using Asp_project.Models;
 using Asp_project.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asp_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -18,7 +20,8 @@ namespace Asp_project.Areas.Admin.Controllers
             _categoryService= categoryService;
             _env = env;
         }
-        
+        [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Index()
         {
            List<Product> products = await _productService.GetAllAsync();
@@ -48,6 +51,7 @@ namespace Asp_project.Areas.Admin.Controllers
             return View(model);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Detail(int? id)
         {
             if (id is null) return BadRequest();
@@ -84,6 +88,7 @@ namespace Asp_project.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Categories = await _categoryService.GetAllSelectAsync();
@@ -91,6 +96,7 @@ namespace Asp_project.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(ProductCreateVM request)
         { 
             ViewBag.Categories = await _categoryService.GetAllSelectAsync();
@@ -147,6 +153,7 @@ namespace Asp_project.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null) return BadRequest();
@@ -164,7 +171,7 @@ namespace Asp_project.Areas.Admin.Controllers
         }
 
         [HttpGet]
-
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             ViewBag.categories = await _categoryService.GetAllSelectAsync();
@@ -197,6 +204,7 @@ namespace Asp_project.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Edit(int? id,ProductEditVM editProduct)
         {
             ViewBag.categories = await _categoryService.GetAllSelectAsync();

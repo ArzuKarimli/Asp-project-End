@@ -2,11 +2,13 @@
 using Asp_project.Areas.Admin.ViewModels.SliderInfo;
 using Asp_project.Models;
 using Asp_project.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asp_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class SliderInfoController : Controller
     {
         private readonly ISliderInfoService _sliderInfoService;
@@ -15,6 +17,7 @@ namespace Asp_project.Areas.Admin.Controllers
             _sliderInfoService = sliderInfoService; 
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Index()
         {
             List<SliderInfo> infos = await _sliderInfoService.GetAll();
@@ -23,12 +26,14 @@ namespace Asp_project.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "superAdmin")]
         public async Task<IActionResult> Create(SliderInfoCreateVM info)
         {
             if (!ModelState.IsValid)
@@ -49,6 +54,7 @@ namespace Asp_project.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "superAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest();
@@ -58,7 +64,9 @@ namespace Asp_project.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
+        [Authorize(Roles = "superAdmin")]
         public async Task<IActionResult> Edit(int? id)
+
         {
             if (id == null) return BadRequest();
             SliderInfo info = await _sliderInfoService.GetByIdAsync((int)id);
@@ -68,6 +76,7 @@ namespace Asp_project.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Edit(int? id, SliderInfoEditVM info)
         {
 

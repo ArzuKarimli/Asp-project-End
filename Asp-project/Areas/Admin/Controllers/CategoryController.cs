@@ -4,11 +4,13 @@ using Asp_project.Areas.Admin.ViewModels.VMCategory;
 using Asp_project.Data;
 using Asp_project.Models;
 using Asp_project.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asp_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class CategoryController : Controller
     {
         
@@ -18,18 +20,23 @@ namespace Asp_project.Areas.Admin.Controllers
        
             _categoryService = categoryService;
         }
+        [HttpGet]
+
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Index()
         {
             return View(await _categoryService.GetAllOrderByDescendingAsync());
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(CategoryCreateVM category)
         {
 
@@ -50,6 +57,7 @@ namespace Asp_project.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Detail(int? id)
         {
             if (id is null) return BadRequest();
@@ -68,6 +76,7 @@ namespace Asp_project.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null) return BadRequest();
@@ -80,6 +89,7 @@ namespace Asp_project.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id is null) return BadRequest();
@@ -92,6 +102,7 @@ namespace Asp_project.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Edit(int? id, CategoryEditVM category)
         {
 

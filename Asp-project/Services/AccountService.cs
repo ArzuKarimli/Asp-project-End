@@ -4,6 +4,7 @@ using Asp_project.Services.Interfaces;
 using Asp_project.ViewModel.Account;
 using Microsoft.AspNetCore.Identity;
 using System.Data;
+using System.Security.Policy;
 
 namespace Asp_project.Services
 {
@@ -20,31 +21,9 @@ namespace Asp_project.Services
             _roleManager = roleManager;
         }
 
-        public async Task Register(RegisterVM request)
-        {
-            AppUser user = new()
-            {
-                UserName = request.Username,
-                Email = request.Email,
-                FullName = request.FullName
-            };
-            
-            var result = await _userManager.CreateAsync(user, request.Password);
-            
-            if (result.Succeeded)
-            {
-                foreach (var role in Enum.GetValues(typeof(Roles)))
-                {
-                    if (!await _roleManager.RoleExistsAsync(nameof(Roles.Member)))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(nameof(Roles.SuperAdmin)));
-                    }
-                }
-                await _userManager.AddToRoleAsync(user, nameof(Roles.SuperAdmin));
-            }
-        }
+   
 
-        public async Task<SignInResult> Login(LoginVM request)
+        public async Task<SignInResult> Login(SignInVM request)
         {
             var user = await _userManager.FindByEmailAsync(request.EmailOrUserName) ?? await _userManager.FindByNameAsync(request.EmailOrUserName);
 

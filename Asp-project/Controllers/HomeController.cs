@@ -6,6 +6,7 @@ using Asp_project.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Asp_project.Controllers
 {
@@ -31,6 +32,7 @@ namespace Asp_project.Controllers
             _cartService = cartService;
            
         }
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var features= await _informationService.GetAllFeatures();
@@ -56,9 +58,13 @@ namespace Asp_project.Controllers
         {
             if (id == null) return BadRequest();
 
-            var result = await _cartService.AddProductToBasketAsync((int)id);
+           List<BasketVM> result= await _cartService.AddProductToBasketAsync((int)id);
+            int count = result.Sum(m => m.Count);
+            decimal total = result.Sum(m => m.Count * m.Price);
 
-            return Ok(new { count = result.count });
+            return Ok(new { count, total });
+
+          
         }
 
         [HttpGet]

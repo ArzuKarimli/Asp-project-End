@@ -6,8 +6,8 @@ namespace Asp_project.Services.Interfaces
 {
     public interface IAccountService
     {
-        Task Register(RegisterVM request);
-        Task<SignInResult> Login(LoginVM request);
+       
+        Task<SignInResult> Login(SignInVM request);
         Task Logout();
     }
 }

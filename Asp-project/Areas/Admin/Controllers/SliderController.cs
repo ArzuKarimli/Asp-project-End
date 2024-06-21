@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Asp_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class SliderController : Controller
     {
         private readonly  ISliderService _sliderService;
@@ -23,6 +25,7 @@ namespace Asp_project.Areas.Admin.Controllers
 
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Index()
         {
             var sliders = await _sliderService.GetAllAsync();
@@ -46,6 +49,7 @@ namespace Asp_project.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Detail(int? id)
         {
             if (id is null) return BadRequest();
@@ -57,6 +61,7 @@ namespace Asp_project.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Create()
         {
             return View();
@@ -64,6 +69,7 @@ namespace Asp_project.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(SliderCreateVM request)
         {
             if (!ModelState.IsValid) return View();
@@ -96,6 +102,7 @@ namespace Asp_project.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null) return BadRequest();
@@ -109,6 +116,7 @@ namespace Asp_project.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return BadRequest();
@@ -120,6 +128,7 @@ namespace Asp_project.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Edit(int? id, SliderEditVM request)
         {
             if (id == null) return BadRequest();

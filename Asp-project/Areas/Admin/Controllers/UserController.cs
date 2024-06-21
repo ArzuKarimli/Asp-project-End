@@ -1,5 +1,6 @@
 ﻿using Asp_project.Areas.Admin.ViewModels.Account;
 using Asp_project.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Asp_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class UserController : Controller
     {
 
@@ -15,6 +17,7 @@ namespace Asp_project.Areas.Admin.Controllers
         {
             _userManager = userManager;
         }
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> Index()
         {
             List<UserRolesVM> userRoles = new();

@@ -2,7 +2,7 @@
 
 namespace Asp_project.ViewModel.Account
 {
-    public class LoginVM
+    public class SignInVM
     {
             [Required]
             public string EmailOrUserName { get; set; }
